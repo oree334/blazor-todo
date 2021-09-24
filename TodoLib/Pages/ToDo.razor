@@ -2,10 +2,10 @@
 
 <div>
     <label class="@design">
-        <input type="checkbox" @bind-value="Todo.Done" />
+        <input type="checkbox" @bind-value="Todo.Done" @onclick="chk_click" />
         @Todo.Text
     </label>
-    <button class="btn btn-info" @onclick="@(() => toastService.ShowToast("I'm an INFO message", ToastLevel.Info))">Info Toast</button>
+    @*<button class="btn btn-info" @onclick="@(() => toastService.ShowToast("I'm an INFO message", ToastLevel.Info))">Info Toast</button>*@
 
 </div>
 
@@ -13,4 +13,12 @@
     [Parameter]
     public ToDoItem? Todo { get; set; }
     public string design { get { return Todo.Done ? "itemchecked" : ""; } }
+    void chk_click()
+    {
+        if (!this.Todo.Done)
+        {
+            toastService.ShowToast(this.Todo.Text + " " + this.Todo.Done, ToastLevel.Info);
+            this.Todo.RealyDone = true;
+        }
+    }
 }

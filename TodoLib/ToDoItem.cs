@@ -8,5 +8,6 @@ namespace TodoLib
         public string? Text { get; set; }
         public bool Done { get; set; }
 
+        public bool RealyDone { get; set; }
     }
 }
