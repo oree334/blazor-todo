@@ -1,0 +1,40 @@
+﻿<h3>TodoList</h3>
+<div>
+    @foreach (var ToDoItem in Todos)
+    {
+        <ToDo ToDo="@ToDoItem"> </ToDo>
+    }
+</div>
+
+<div>
+
+    <input type="text" @bind-value="NewTodo" onkeyup="@txt_keyup" />
+    <button @onclick="AddNewTodo" class="btn btn-primary"> Add </button>
+
+
+</div>
+
+
+
+
+@code {
+    [Parameter]
+    public List<ToDoItem> Todos { get; set; }
+    public string NewTodo { get; set; }
+    public bool BtnEnable { get { return !string.IsNullOrWhiteSpace(NewTodo); } }
+
+    void AddNewTodo()
+    {
+        if (BtnEnable)
+        {
+        Todos.Add(new ToDoItem { Text = NewTodo });
+        NewTodo = string.Empty;
+        }
+
+    }
+
+    void txt_keyup()
+    {
+        this.StateHasChanged();
+    }
+}

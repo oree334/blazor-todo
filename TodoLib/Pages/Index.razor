@@ -1,0 +1,20 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+
+
+<div>
+<div class="col-3"></div>
+<div class="col-7">
+<TodoList Todos="@Todolist"></TodoList>
+</div>
+</div>
+
+
+
+
+
+@code{
+    public List<ToDoItem> Todolist { get; set; } = new List<ToDoItem>{ new ToDoItem { Text = "blabal" } ,new ToDoItem { Text = "blabal2" } };
+
+}

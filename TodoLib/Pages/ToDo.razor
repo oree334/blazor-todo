@@ -1,0 +1,11 @@
+﻿
+<div >
+<input type="checkbox" @bind-value="Todo.Done"/>
+<label  class="@design">@Todo.Text </label>
+</div>
+
+@code {
+    [Parameter]
+    public ToDoItem? Todo { get; set; }
+    public string design { get { return Todo.Done?"itemchecked":""; } }
+}
