@@ -1,11 +1,16 @@
-﻿
-<div >
-<input type="checkbox" @bind-value="Todo.Done"/>
-<label  class="@design">@Todo.Text </label>
+﻿@inject ToastService toastService
+
+<div>
+    <label class="@design">
+        <input type="checkbox" @bind-value="Todo.Done" />
+        @Todo.Text
+    </label>
+    <button class="btn btn-info" @onclick="@(() => toastService.ShowToast("I'm an INFO message", ToastLevel.Info))">Info Toast</button>
+
 </div>
 
 @code {
     [Parameter]
     public ToDoItem? Todo { get; set; }
-    public string design { get { return Todo.Done?"itemchecked":""; } }
+    public string design { get { return Todo.Done ? "itemchecked" : ""; } }
 }

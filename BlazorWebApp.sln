@@ -5,9 +5,9 @@ VisualStudioVersion = 17.0.31717.71
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWebApp", "BlazorWebApp\BlazorWebApp.csproj", "{A352E270-B936-4956-8BB5-810092C4BE83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoLib", "TodoLib\TodoLib.csproj", "{8A6714B3-D1A9-4CC3-A0F3-E44136EB5F8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoLib", "TodoLib\TodoLib.csproj", "{8A6714B3-D1A9-4CC3-A0F3-E44136EB5F8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiApp1", "MauiApp1\MauiApp1.csproj", "{A1D6A752-2552-41C4-BB2F-0676954DE661}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiApp1", "MauiApp1\MauiApp1.csproj", "{A1D6A752-2552-41C4-BB2F-0676954DE661}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -4,6 +4,7 @@ using Microsoft.Maui;
 using Microsoft.Maui.Controls.Compatibility;
 using Microsoft.Maui.Controls.Hosting;
 using Microsoft.Maui.Hosting;
+using TodoLib.Dependencies;
 
 namespace MauiApp1
 {
@@ -20,7 +21,9 @@ namespace MauiApp1
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 });
 
-            builder.Services.AddBlazorWebView();
+            builder.Services
+                .AddBlazorWebView()
+                .AddTodoServices();
 
             return builder.Build();
         }
