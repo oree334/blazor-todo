@@ -4,7 +4,7 @@ using TodoLib.Services;
 
 namespace TodoLib.Pages
 {
-    public class ToastBase : ComponentBase, IDisposable
+    partial class Toast : ComponentBase, IDisposable
     {
         [Inject]
         ToastService ToastService { get; set; }
