@@ -7,7 +7,13 @@ namespace TodoLib.Dependencies
     {
         public static IServiceCollection AddTodoServices(this IServiceCollection services)
         {
-            services.AddScoped<ToastService>();
+            services
+                .AddScoped<ToastService>()
+                .AddSingleton<AppState>((svp) => {
+                    //use this to load saved data
+
+                    return new AppState(new System.Collections.Generic.List<ToDoItem>());
+                });
             return services;
         }
     }
