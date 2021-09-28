@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Blazored.LocalStorage;
 //using TodoLib.Services;
 
 namespace TodoLib.Dependencies
@@ -7,12 +8,15 @@ namespace TodoLib.Dependencies
     {
         public static IServiceCollection AddTodoServices(this IServiceCollection services)
         {
-            services
-                .AddSingleton<AppState>((svp) => {
-                    //use this to load saved data
+            services.AddBlazoredLocalStorage();
+            services.AddSingleton<AppData>(/*(svp) => {
+                //use this to load saved data
+                var ast = new AppState(new System.Collections.Generic.List<ToDoItem>());
 
-                    return new AppState(new System.Collections.Generic.List<ToDoItem>());
-                });
+                return ast;
+            }*/);
+
+
             return services;
         }
     }

@@ -1,17 +1,36 @@
-﻿using System.Collections.Generic;
+﻿using Blazored.LocalStorage;
+using System.Collections.Generic;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
 namespace TodoLib
 {
-    public class AppState
+    public class AppData
     {
-        public AppState()
+        private ILocalStorageService localStore { get; set; }
+        public void SetLocalStore(ILocalStorageService localStore)
         {
-            Todos = new List<ToDoItem> { new ToDoItem { Text = "Test me" } };
+            this.localStore = localStore;
         }
-        public AppState(List<ToDoItem> todos)
+
+        public async Task<List<ToDoItem>> GetTodosAsync()
         {
-            Todos = todos;
+            var json = await localStore.GetItemAsStringAsync("todos");
+            if (string.IsNullOrEmpty(json))
+            {
+                return new List<ToDoItem> { new ToDoItem { Text = "Test me" } };
+            }
+            else
+            {
+                return JsonSerializer.Deserialize<List<ToDoItem>>(json);
+            }
         }
-        public List<ToDoItem> Todos { get; }
+
+        public async Task SaveTodosAsync(List<ToDoItem> todos)
+        {
+            var json = JsonSerializer.Serialize(todos);
+            await localStore.SetItemAsStringAsync("todos", json);
+        }
     }
 }

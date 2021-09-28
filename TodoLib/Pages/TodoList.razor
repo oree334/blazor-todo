@@ -1,8 +1,13 @@
-﻿<h3>TodoList</h3>
+﻿@inject AppData appData
+
+<h3>TodoList</h3>
 <div>
-    @foreach (var ToDoItem in Todos)
+    @if (this.Todos != null)
     {
-        <ToDo ToDo="@ToDoItem" TodosComp="@this"> </ToDo>
+        @foreach (var ToDoItem in Todos)
+        {
+            <ToDo ToDo="@ToDoItem" TodosComp="@this"> </ToDo>
+        }
     }
 </div>
 
@@ -15,9 +20,9 @@
 </div>
 <div class="@ToasCss">
     <div class="toast-msg">
-   <div class="msg-box" >
-       this is the toast
-       </div>
+        <div class="msg-box">
+            this is the toast
+        </div>
     </div>
 </div>
 
@@ -27,16 +32,23 @@
     public bool ToastVisible { get; set; } = false;
     public string ToasCss { get { return ToastVisible ? "toast-show" : "toast-hide"; } }
 
-    [Parameter]
-    public List<ToDoItem> Todos { get; set; }
+    public List<ToDoItem>? Todos { get; set; }
+
     public string NewTodo { get; set; }
     public bool BtnEnable { get { return !string.IsNullOrWhiteSpace(NewTodo); } }
 
-    void AddNewTodo()
+    protected override async Task OnInitializedAsync()
+    {
+        this.Todos = await appData.GetTodosAsync();
+    }
+
+    async Task AddNewTodo()
     {
         if (BtnEnable)
         {
             Todos.Add(new ToDoItem { Text = NewTodo });
+            await appData.SaveTodosAsync(this.Todos);
+
             NewTodo = string.Empty;
         }
 

@@ -1,5 +1,8 @@
 ﻿@inherits LayoutComponentBase
 
+@inject AppData appData
+@inject ILocalStorageService localStore
+
 <div class="page">
 
     <div class="sidebar">
@@ -16,3 +19,11 @@
         </article>
     </main>
 </div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        appData.SetLocalStore(localStore);
+        base.OnInitialized();
+    }
+}

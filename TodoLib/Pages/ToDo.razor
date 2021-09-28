@@ -1,8 +1,8 @@
-﻿@inject AppState AppState;
+﻿@inject AppData appData;
 
 <div>
     <label class="@design">
-        <input type="checkbox" @bind-value="Todo.Done" @onclick="chk_click" />
+        <input type="checkbox" checked="@Todo.Done" @onchange="chk_change" />
         @Todo.Text
     </label>
     @*<button class="btn btn-info" @onclick="@(() => toastService.ShowToast("I'm an INFO message", ToastLevel.Info))">Info Toast</button>*@
@@ -17,13 +17,16 @@
     public TodoList? TodosComp { get; set; }
 
     public string design { get { return Todo.Done ? "itemchecked" : ""; } }
-    async void chk_click()
+    async void chk_change()
     {
-        if (!this.Todo.Done)
+        this.Todo.Done = !this.Todo.Done;
+        await appData.SaveTodosAsync(this.TodosComp.Todos);
+        if (this.Todo.Done)
         {
             //toastService.ShowToast(this.Todo.Text + " " + this.Todo.Done, ToastLevel.Info);
             this.Todo.RealyDone = true;
             await this.TodosComp?.ShowToast();
         }
+
     }
 }
