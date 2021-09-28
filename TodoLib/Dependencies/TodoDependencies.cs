@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using TodoLib.Services;
+//using TodoLib.Services;
 
 namespace TodoLib.Dependencies
 {
@@ -8,7 +8,6 @@ namespace TodoLib.Dependencies
         public static IServiceCollection AddTodoServices(this IServiceCollection services)
         {
             services
-                .AddScoped<ToastService>()
                 .AddSingleton<AppState>((svp) => {
                     //use this to load saved data
 

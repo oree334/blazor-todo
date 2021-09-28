@@ -2,7 +2,7 @@
 <div>
     @foreach (var ToDoItem in Todos)
     {
-        <ToDo ToDo="@ToDoItem"> </ToDo>
+        <ToDo ToDo="@ToDoItem" TodosComp="@this"> </ToDo>
     }
 </div>
 
@@ -13,11 +13,20 @@
 
 
 </div>
-
+<div class="@ToasCss">
+    <div class="toast-msg">
+   <div class="msg-box" >
+       this is the toast
+       </div>
+    </div>
+</div>
 
 
 
 @code {
+    public bool ToastVisible { get; set; } = false;
+    public string ToasCss { get { return ToastVisible ? "toast-show" : "toast-hide"; } }
+
     [Parameter]
     public List<ToDoItem> Todos { get; set; }
     public string NewTodo { get; set; }
@@ -27,14 +36,23 @@
     {
         if (BtnEnable)
         {
-        Todos.Add(new ToDoItem { Text = NewTodo });
-        NewTodo = string.Empty;
+            Todos.Add(new ToDoItem { Text = NewTodo });
+            NewTodo = string.Empty;
         }
 
     }
 
     void txt_keyup()
     {
+        this.StateHasChanged();
+    }
+
+    public async Task ShowToast()
+    {
+        ToastVisible = true;
+        this.StateHasChanged();
+        await Task.Delay(5000);
+        ToastVisible = false;
         this.StateHasChanged();
     }
 }

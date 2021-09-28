@@ -1,5 +1,4 @@
-﻿@inject ToastService toastService
-@inject AppState AppState;
+﻿@inject AppState AppState;
 
 <div>
     <label class="@design">
@@ -13,13 +12,18 @@
 @code {
     [Parameter]
     public ToDoItem? Todo { get; set; }
+
+    [Parameter]
+    public TodoList? TodosComp { get; set; }
+
     public string design { get { return Todo.Done ? "itemchecked" : ""; } }
-    void chk_click()
+    async void chk_click()
     {
         if (!this.Todo.Done)
         {
-            toastService.ShowToast(this.Todo.Text + " " + this.Todo.Done, ToastLevel.Info);
+            //toastService.ShowToast(this.Todo.Text + " " + this.Todo.Done, ToastLevel.Info);
             this.Todo.RealyDone = true;
+            await this.TodosComp?.ShowToast();
         }
     }
 }
